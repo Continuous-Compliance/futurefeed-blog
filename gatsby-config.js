@@ -6,7 +6,6 @@ module.exports = {
   plugins: [
     `gatsby-plugin-preload-fonts`,
     `gatsby-plugin-material-ui`,
-    `gatsby-theme-material-ui`,
     `gatsby-plugin-offline`,
     `gatsby-plugin-react-helmet`,
     `gatsby-transformer-sharp`,
