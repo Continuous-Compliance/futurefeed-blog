@@ -8,6 +8,7 @@ import BackgroundImage from 'gatsby-background-image'
 import Bio from '../components/Bio'
 import Layout from '../components/layout'
 import { rhythm, scale } from '../utils/typography'
+import { Box, Typography } from '@material-ui/core'
 
 class BlogPostTemplate extends React.Component {
   render() {
@@ -42,48 +43,32 @@ class BlogPostTemplate extends React.Component {
         `}
         </style>
         <Helmet title={`${post.title} | ${siteTitle}`} />
-        <div
+        <Typography
+          variant="h2"
+          component="h1"
           style={{
-            marginTop: rhythm(1.4),
-          }}
-        >
-          <Link to="/">← Back to Posts</Link>
-        </div>
-        <h1
-          style={{
-            marginTop: rhythm(1),
+            marginTop: rhythm(3),
           }}
         >
           {post.title}
-        </h1>
-        <p
-          style={{
-            ...scale(-1 / 5),
-            display: 'block',
-            marginBottom: rhythm(0.6),
-            marginTop: rhythm(-0.6),
-          }}
-        >
-          {post.created}
-        </p>
+        </Typography>
+        <Typography variant="body1">{post.created}</Typography>
         <BackgroundImage
           Tag="div"
           className="post-hero"
           fluid={post.metadata.hero.local.childImageSharp.fluid}
           backgroundColor={`#007ACC`}
           style={{
-            marginBottom: rhythm(0.6),
-          }}
-        />
-        <div
-          className="post-content"
-          dangerouslySetInnerHTML={{ __html: post.content }}
-        />
-        <hr
-          style={{
+            marginTop: rhythm(1),
             marginBottom: rhythm(1),
           }}
         />
+        <Typography variant="body1" component="div">
+          <div
+            className="post-content"
+            dangerouslySetInnerHTML={{ __html: post.content }}
+          />
+        </Typography>
         <Bio settings={author} />
 
         <ul

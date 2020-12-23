@@ -3,10 +3,10 @@ import { Link } from 'gatsby'
 import get from 'lodash/get'
 import { Helmet } from 'react-helmet'
 import { graphql } from 'gatsby'
-
 import Bio from '../components/Bio'
 import Layout from '../components/layout'
 import { rhythm } from '../utils/typography'
+import { CssBaseline, Box, Typography } from '@material-ui/core'
 
 class BlogIndex extends React.Component {
   render() {
@@ -19,30 +19,39 @@ class BlogIndex extends React.Component {
     const location = get(this, 'props.location')
 
     return (
-      <Layout location={location}>
-        <Helmet title={siteTitle} />
-        <Bio settings={author} />
-        {posts.map(({ node }) => {
-          const title = get(node, 'title') || node.slug
-          return (
-            <div key={node.slug}>
-              <h3
-                style={{
-                  marginBottom: rhythm(1 / 4),
-                }}
-              >
-                <Link style={{ boxShadow: 'none' }} to={`posts/${node.slug}`}>
-                  {title}
-                </Link>
-              </h3>
-              <small>{node.created}</small>
-              <p
-                dangerouslySetInnerHTML={{ __html: node.metadata.description }}
-              />
-            </div>
-          )
-        })}
-      </Layout>
+      <>
+        <CssBaseline />
+        <Layout location={location}>
+          <Helmet title={siteTitle}>
+            <link
+              rel="stylesheet"
+              href={`https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap`}
+            />
+          </Helmet>
+          {posts.map(({ node }) => {
+            const title = get(node, 'title') || node.slug
+            return (
+              <Box key={node.slug} mt={10}>
+                <Typography variant="h5" component="h3">
+                  <Link style={{ boxShadow: 'none' }} to={`posts/${node.slug}`}>
+                    {title}
+                  </Link>
+                </Typography>
+                <Typography variant="body2">
+                  <small>{node.created}</small>
+                </Typography>
+                <Typography variant="body1">
+                  <p
+                    dangerouslySetInnerHTML={{
+                      __html: node.metadata.description,
+                    }}
+                  />
+                </Typography>
+              </Box>
+            )
+          })}
+        </Layout>
+      </>
     )
   }
 }
